@@ -105,7 +105,6 @@ async function buildWeatherData(currentData) {
     return { weather, forecast, hourly, bgClass };
 }
 
-
 router.get('/', (req, res) => {
     res.render('home');
 });
