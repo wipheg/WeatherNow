@@ -1,5 +1,10 @@
 # ⛅ WeatherNow
 
+![CI](https://github.com/Anurag-3112/WeatherNow/actions/workflows/nodejs.yml/badge.svg)
+![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+
 A full-stack weather application built with **Node.js**, **Express.js**, **Handlebars**, and **MongoDB** — featuring real-time weather data, dynamic themes, and a clean responsive UI.
 
 🌐 **Live Demo:** [weathernow](https://weathernow-7il3.onrender.com/)
