@@ -166,6 +166,35 @@ To deploy your own instance:
 
 ---
 
+## Contributing
+
+Contributions are welcome!
+
+If you'd like to contribute:
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to your fork
+5. Open a Pull Request
+
+Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file before submitting contributions.
+
+---
+
+## Good First Issues
+
+New contributors can start with issues labeled:
+
+- `good first issue`
+- `beginner friendly`
+- `help wanted`
+- `documentation`
+
+These issues are specifically designed for first-time contributors.
+
+---
+
 ## Author
 
 **Anurag Kumar**
