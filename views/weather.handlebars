@@ -140,6 +140,20 @@
     .btn-fav:hover { background: rgba(255,255,255,0.35); }
     .btn-fav.saved { background: rgba(255,215,0,0.3); border-color: gold; }
 
+    .loading-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #1a1a2e;
+        font-weight: 700;
+    }
+
+    .loading-disabled {
+        opacity: 0.65;
+        pointer-events: none;
+    }
+
 
     .empty-state {
         position: relative;
@@ -327,20 +341,24 @@
                 placeholder="Enter city name (e.g. Mumbai)"
                 required
             />
-            <button class="btn btn-primary" type="submit">Search</button>
+            <button class="btn btn-primary" type="submit" id="searchButton">Search</button>
         </div>
     </form>
 
+    <div class="loading-indicator d-none my-3" id="loadingIndicator" role="status" aria-live="polite">
+        <div class="spinner-border text-primary" aria-hidden="true"></div>
+        <span>Fetching weather data...</span>
+    </div>
+
     <div class="mb-3">
-        <button class="btn-location" onclick="getLocation()">📍 Use My Location</button>
+        <button class="btn-location" id="locationButton" onclick="getLocation()">📍 Use My Location</button>
     </div>
 
     {{#if recentSearches.length}}
         <div class="mb-2">
             <small class="text-muted fw-bold">Recent: </small>
             {{#each recentSearches}}
-                <span class="badge bg-secondary recent-badge me-1"
-                    onclick="document.getElementById('cityInput').value='{{this.city}}'; document.getElementById('weatherForm').submit();">
+                <span class="badge bg-secondary recent-badge me-1" data-city="{{this.city}}" onclick="searchCity(this.dataset.city)">
                     {{this.city}}
                 </span>
             {{/each}}
@@ -351,8 +369,7 @@
         <div class="mb-4">
             <small class="text-muted fw-bold">⭐ Favourites: </small>
             {{#each favourites}}
-                <span class="fav-badge me-1"
-                    onclick="document.getElementById('cityInput').value='{{this.city}}'; document.getElementById('weatherForm').submit();">
+                <span class="fav-badge me-1" data-city="{{this.city}}" onclick="searchCity(this.dataset.city)">
                     ⭐ {{this.city}}
                 </span>
             {{/each}}
@@ -472,6 +489,25 @@
 </div>
 
 <script>
+    const weatherForm = document.getElementById('weatherForm');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const searchButton = document.getElementById('searchButton');
+    const locationButton = document.getElementById('locationButton');
+
+    function showLoading() {
+        loadingIndicator.classList.remove('d-none');
+        searchButton.disabled = true;
+        locationButton.disabled = true;
+
+        document.querySelectorAll('.recent-badge, .fav-badge, .city-pill').forEach((item) => {
+            item.classList.add('loading-disabled');
+        });
+    }
+
+    weatherForm.addEventListener('submit', () => {
+        showLoading();
+    });
+
     function getLocation() {
         if (!navigator.geolocation) {
             alert('Geolocation is not supported by your browser.');
@@ -479,6 +515,7 @@
         }
         navigator.geolocation.getCurrentPosition(
             (pos) => {
+                showLoading();
                 window.location.href = `/weather/location?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`;
             },
             () => alert('Unable to get your location. Please allow location access.')
@@ -487,6 +524,6 @@
 
     function searchCity(city) {
         document.getElementById('cityInput').value = city;
-        document.getElementById('weatherForm').submit();
+        weatherForm.requestSubmit();
     }
 </script>
