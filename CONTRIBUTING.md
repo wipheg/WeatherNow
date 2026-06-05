@@ -1,6 +1,6 @@
 # Contributing to WeatherNow
 
-First off, thank you for considering contributing to WeatherNow! 🎉
+First off, thank you for considering contributing to WeatherNow!
 
 We welcome contributions of all kinds, including bug fixes, new features, documentation improvements, UI enhancements, and performance optimizations.
 
@@ -106,4 +106,4 @@ If you're new to open source, look for issues labeled:
 
 Feel free to open an issue if you have questions or need guidance.
 
-Happy Coding! 🚀
+Happy Coding!
